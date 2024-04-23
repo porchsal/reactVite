@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import confetti from "canvas-confetti";
 import { TURNS } from './constants';
 import Square from './Components/Square';
