@@ -1,11 +1,23 @@
 
 import './App.css'
-import  responseMovies from './mocks/with-results.json'
+import responseMovies from './mocks/with-results.json'
 import { Movies } from './components/Movies'
 
-function App() {
-  const movies = responseMovies.Search
+export function useMovies() {
+    const movies = responseMovies.Search
+    
+    const mappedMovies = movies?.map(movie => ({
+      id: movie.imdbID,
+      title: movie.Title,
+      year: movie.Year,
+      image: movie.Poster
+    }))
+    return { movies: mappedMovies }
+}
 
+export default function App() {
+  const { movies: mappedMovies } = useMovies()
+  
   return (
   <div className='page'>  
   
@@ -17,11 +29,9 @@ function App() {
       </form>
     </header>
     <main>
-      <Movies movies={movies} />
+      <Movies movies={mappedMovies} />
     </main>
   
   </div>
   )
 }
-
-export default App

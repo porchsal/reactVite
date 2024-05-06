@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 function ListOfMovies({ movies }) {
-    console.log(movies)
+    
   return (
     <ul className="movies">
             {
               movies.map(movie => {
                 return (
-                  <li key={movie.imdbID}>
-                    <h3>{movie.Title}</h3>
-                    <p>{movie.Year}</p>
-                    <img src={movie.Poster} alt={movie.title} />
+                  <li className="movie" key={movie.id}>
+                    <h3>{movie.title}</h3>
+                    <p>{movie.year}</p>
+                    <img src={movie.image} alt={movie.title} />
                   </li>
                 )
               })
@@ -18,8 +19,7 @@ function ListOfMovies({ movies }) {
 }
 
 function NoMoviesResult() {
-    return
-    (
+    return (   
     <p>No movies found</p>
 )
 }
