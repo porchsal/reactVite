@@ -1,13 +1,13 @@
 
 import './App.css'
-import responseMovies from './mocks/with-results.json'
+import  responseMovies from './mocks/with-results.json'
+import { Movies } from './components/Movies'
 
 function App() {
   const movies = responseMovies.Search
-  const hasMovies = movies?.length > 0
 
   return (
-  <div id='page'>  
+  <div className='page'>  
   
     <header>  
       <form className='form'>
@@ -17,24 +17,7 @@ function App() {
       </form>
     </header>
     <main>
-      {
-        hasMovies ? (
-          <ul>
-            {
-              movies.map(movie => {
-                return (
-                  <li key={movie.imdbID}>
-                    <h3>{movie.Title}</h3>
-                    <p>{movie.Year}</p>
-                    <img src={movie.Poster} alt={movie.title} />
-                  </li>
-                )
-              })
-            }
-          </ul>
-        )
-        : <p>No movies found</p>
-      }
+      <Movies movies={movies} />
     </main>
   
   </div>
