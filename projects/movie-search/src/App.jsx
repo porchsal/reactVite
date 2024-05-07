@@ -1,35 +1,38 @@
 
 import './App.css'
-import responseMovies from './mocks/with-results.json'
+import { useMovies } from './hooks/useMovies'
 import { Movies } from './components/Movies'
-
-export function useMovies() {
-    const movies = responseMovies.Search
-    
-    const mappedMovies = movies?.map(movie => ({
-      id: movie.imdbID,
-      title: movie.Title,
-      year: movie.Year,
-      image: movie.Poster
-    }))
-    return { movies: mappedMovies }
-}
+import { useRef } from 'react'
 
 export default function App() {
-  const { movies: mappedMovies } = useMovies()
-  
+  //const { movies: mappedMovies } = useMovies()
+  const {movies} = useMovies()
+  //const inputRef = useRef()
+
+  const handleSubmit = (event) => {
+    //const inputEl = inputRef.current
+    //const value = inputEl.value
+   event.preventDefault()
+   const { query } = Object.fromEntries(
+    new FormData(event.target)
+    )
+    console.log(query)
+  }
+
   return (
   <div className='page'>  
   
     <header>  
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <h1>Movie Search</h1>
-        <input type="text" placeholder="Avengers, Matrix, Star Wars..." />
-        <button>Search</button>
+        {/* <input type="text" ref={inputRef} placeholder="Avengers, Matrix, Star Wars..." /> */}
+        <input name='query' placeholder="Avengers, Matrix, Star Wars..." />
+        <button type="submit" >Search</button>
       </form>
     </header>
     <main>
-      <Movies movies={mappedMovies} />
+      {/* <Movies movies={mappedMovies} /> */}
+      <Movies movies={movies} />
     </main>
   
   </div>
